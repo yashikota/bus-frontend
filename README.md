@@ -1,3 +1,3 @@
 # bus-frontend
 
-<https://bus.oit.yahshikota.com>
+<https://bus.oit.yashikota.com>
