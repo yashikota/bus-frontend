@@ -1,9 +1,9 @@
 import * as React from "react";
 import { CssBaseline, useMediaQuery, ThemeProvider, createTheme } from "@mui/material";
 import { Header } from "./components/header";
-import { Bus } from "./bus"
 import { Route, Routes } from "react-router-dom";
 import { About } from "./about";
+import BusTimetable from "./bus";
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
 
@@ -64,7 +64,7 @@ export const App = () => {
                     />
 
                     <Routes>
-                        <Route path="/" element={<Bus />} />
+                        <Route path="/" element={<BusTimetable />} />
                         <Route path="/about" element={<About />} />
                     </Routes>
 

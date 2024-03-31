@@ -3,8 +3,9 @@
 ## 使いかた
 
 1分毎に自動更新されます。  
+お問い合わせは[ここ](https://github.com/oit-tools/bus-frontend/issues)からお願いします。  
 
-## 北山中央 三兄弟の場所
+## 北山中央三兄弟の場所
 
 <img src="./map.avif" width="100%" alt="map">
 

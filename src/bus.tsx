@@ -1,38 +1,75 @@
-import { Container, Grid } from "@mui/material";
-import { CardComponent } from "./components/card";
+import * as React from 'react';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import { Container } from '@mui/material';
 
-export const Bus = () => (
-    <Container>
-        <Grid
-            sx={{ flexGrow: 1, my: "10px" }}
-            container
-            alignItems="center"
-            justifyContent="center"
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
         >
-            <Grid sx={{ m: 1 }}>
-                <CardComponent
-                    title="樟葉 → OIT"
-                    description=""
-                />
-            </Grid>
-            <Grid sx={{ m: 1 }}>
-                <CardComponent
-                    title="OIT → 樟葉"
-                    description=""
-                />
-            </Grid>
-            <Grid sx={{ m: 1 }}>
-                <CardComponent
-                    title="長尾 → OIT"
-                    description=""
-                />
-            </Grid>
-            <Grid sx={{ m: 1 }}>
-                <CardComponent
-                    title="OIT → 長尾"
-                    description=""
-                />
-            </Grid>
-        </Grid>
-    </Container>
-);
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+
+function a11yProps(index: number) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
+export default function BusTimetable() {
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
+
+    return (
+        <Container>
+            <Box component="section" sx={{ mt: 2, p: 2 }}>
+                <Typography variant="h4" component="h1" align="center">
+                    {/* 現在時刻を表示 */}
+                </Typography>
+            </Box>
+            <Box sx={{ width: '100%' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                        <Tab label="樟葉 → OIT" {...a11yProps(0)} />
+                        <Tab label="OIT → 樟葉" {...a11yProps(1)} />
+                        <Tab label="長尾 → OIT" {...a11yProps(2)} />
+                        <Tab label="OIT → 長尾" {...a11yProps(3)} />
+                    </Tabs>
+                </Box>
+                <CustomTabPanel value={value} index={0}>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={1}>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={2}>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={3}>
+                </CustomTabPanel>
+            </Box>
+        </Container>
+    );
+}
