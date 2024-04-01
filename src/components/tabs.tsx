@@ -3,8 +3,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Container } from '@mui/material';
+import { CircularProgress, Container } from '@mui/material';
 import Clock from './clock';
+import { CardComponent } from './card';
+import { Bus } from './card';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -39,12 +41,76 @@ function a11yProps(index: number) {
     };
 }
 
+const getTimetables = async () => {
+    const url = ""
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
+}
+
 export default function BusTimetable() {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    const [kuzuhaOIT, setKuzuhaOIT] = React.useState<Bus[]>([]);
+    const [OITKuzuha, setOITKuzuha] = React.useState<Bus[]>([]);
+    const [nagaoOIT, setNagaoOIT] = React.useState<Bus[]>([]);
+    const [OITNagao, setOITNagao] = React.useState<Bus[]>([]);
+
+    const busRoutes = [
+        { buses: kuzuhaOIT, label: '樟葉 → OIT' },
+        { buses: OITKuzuha, label: 'OIT → 樟葉' },
+        { buses: nagaoOIT, label: '長尾 → OIT' },
+        { buses: OITNagao, label: 'OIT → 長尾' }
+    ];
+
+    const renderTabPanel = (buses: Bus[], index: number) => {
+        if (!buses) {
+            return (
+                <CustomTabPanel value={value} index={index}>
+                    バスの情報がありません
+                </CustomTabPanel>
+            );
+        } else if (buses.length === 0) {
+            return (
+                <CustomTabPanel value={value} index={index}>
+                    <CircularProgress />
+                </CustomTabPanel>
+            );
+        }
+
+        return (
+            <CustomTabPanel value={value} index={index}>
+                {buses.map((bus: Bus) => (
+                    <CardComponent
+                        BusStop={bus.BusStop}
+                        Stand={bus.Stand}
+                        Name={bus.Name}
+                        IsSignal={bus.IsSignal}
+                        OnTime={bus.OnTime}
+                        EstimatedTime={bus.EstimatedTime}
+                        MoreMinutes={bus.MoreMinutes}
+                        DelayMinutes={bus.DelayMinutes}
+                        System={bus.System}
+                        Destination={bus.Destination}
+                    />
+                ))}
+            </CustomTabPanel>
+        );
+    };
+
+    React.useEffect(() => {
+        getTimetables().then((data) => {
+            setKuzuhaOIT(data.BusTimetables["Kuzuha-OIT"]);
+            setOITKuzuha(data.BusTimetables["OIT-Kuzuha"]);
+            setNagaoOIT(data.BusTimetables["Nagao-OIT"]);
+            setOITNagao(data.BusTimetables["OIT-Nagao"]);
+        });
+    }, []);
 
     return (
         <Container>
@@ -62,14 +128,7 @@ export default function BusTimetable() {
                         <Tab label="OIT → 長尾" {...a11yProps(3)} />
                     </Tabs>
                 </Box>
-                <CustomTabPanel value={value} index={0}>
-                </CustomTabPanel>
-                <CustomTabPanel value={value} index={1}>
-                </CustomTabPanel>
-                <CustomTabPanel value={value} index={2}>
-                </CustomTabPanel>
-                <CustomTabPanel value={value} index={3}>
-                </CustomTabPanel>
+                {busRoutes.map((route, index) => renderTabPanel(route.buses, index))}
             </Box>
         </Container>
     );
