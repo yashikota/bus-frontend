@@ -40,6 +40,15 @@ function a11yProps(index: number) {
 
 export default function BusTimetable() {
     const [value, setValue] = React.useState(0);
+    const [time, setTime] = React.useState(new Date());
+
+    // 現在時刻を1秒ごとに更新
+    React.useEffect(() => {
+        const intervalId = setInterval(() => {
+            setTime(new Date());
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, []);
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -48,8 +57,8 @@ export default function BusTimetable() {
     return (
         <Container>
             <Box component="section" sx={{ mt: 2, p: 2 }}>
-                <Typography variant="h4" component="h1" align="center">
-                    {/* 現在時刻を表示 */}
+                <Typography variant="h5" component="h1" align="left">
+                    {time.toLocaleTimeString()}
                 </Typography>
             </Box>
             <Box sx={{ width: '100%' }}>
