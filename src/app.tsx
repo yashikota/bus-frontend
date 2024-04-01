@@ -3,7 +3,7 @@ import { CssBaseline, useMediaQuery, ThemeProvider, createTheme } from "@mui/mat
 import { Header } from "./components/header";
 import { Route, Routes } from "react-router-dom";
 import { About } from "./about";
-import BusTimetable from "./bus";
+import BusTimetable from "./components/tabs";
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
 
