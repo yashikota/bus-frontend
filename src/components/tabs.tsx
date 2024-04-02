@@ -42,7 +42,7 @@ function a11yProps(index: number) {
 }
 
 const getTimetables = async () => {
-    const url = "http://localhost:8080/v1/all";
+    const url = "https://api.bus.oit.yashikota.com/v1/all";
     const response = await fetch(url);
     const data = await response.json();
 
