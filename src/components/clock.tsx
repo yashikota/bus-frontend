@@ -17,3 +17,28 @@ export default function Clock() {
         </>
     );
 }
+
+export function OneMinuteTimer() {
+    const [timer, setTimer] = React.useState(60);
+
+    // タイマーを1秒ごとに更新
+    React.useEffect(() => {
+        const intervalId = setInterval(() => {
+            setTimer((prevTime) => prevTime - 1);
+        }, 1000);
+        return () => clearInterval(intervalId);
+    }, []);
+
+    // タイマーが0になったら60にリセット
+    React.useEffect(() => {
+        if (timer === 0) {
+            setTimer(60);
+        }
+    }, [timer]);
+
+    return (
+        <>
+            {timer}
+        </>
+    );
+}

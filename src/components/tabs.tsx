@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { CircularProgress, Container } from '@mui/material';
-import Clock from './clock';
+import Clock, { OneMinuteTimer } from './clock';
 import { CardComponent } from './card';
 import { Bus } from './card';
 
@@ -42,7 +42,7 @@ function a11yProps(index: number) {
 }
 
 const getTimetables = async () => {
-    const url = ""
+    const url = "http://localhost:8080/v1/all"
     const response = await fetch(url);
     const data = await response.json();
 
@@ -104,13 +104,20 @@ export default function BusTimetable() {
     };
 
     React.useEffect(() => {
-        getTimetables().then((data) => {
+        const fetchTimetables = async () => {
+            const data = await getTimetables();
             setKuzuhaOIT(data.BusTimetables["Kuzuha-OIT"]);
             setOITKuzuha(data.BusTimetables["OIT-Kuzuha"]);
             setNagaoOIT(data.BusTimetables["Nagao-OIT"]);
             setOITNagao(data.BusTimetables["OIT-Nagao"]);
-        });
-    }, []);
+        };
+
+        fetchTimetables();
+        const fetchInterval = 70000 // 70秒
+        const intervalId = setInterval(fetchTimetables, fetchInterval);
+
+        return () => clearInterval(intervalId);
+    } , []);
 
     return (
         <Container>
@@ -118,10 +125,13 @@ export default function BusTimetable() {
                 <Typography variant="h5" component="h1" align="left">
                     <Clock />
                 </Typography>
+                <Typography variant="h5" component="h1" align="right">
+                    {/* <OneMinuteTimer /> */}
+                </Typography>
             </Box>
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Tabs value={value} onChange={handleChange}>
                         <Tab label="樟葉 → OIT" {...a11yProps(0)} />
                         <Tab label="OIT → 樟葉" {...a11yProps(1)} />
                         <Tab label="長尾 → OIT" {...a11yProps(2)} />
