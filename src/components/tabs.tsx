@@ -1,12 +1,12 @@
-import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { CircularProgress, Container } from '@mui/material';
-import Clock, { OneMinuteTimer } from './clock';
-import { CardComponent } from './card';
-import { Bus } from './card';
+import * as React from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { CircularProgress, Container } from "@mui/material";
+import Clock from "./clock";
+import { CardComponent } from "./card";
+import type { Bus } from "./card";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -37,17 +37,17 @@ function CustomTabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
     return {
         id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
+        "aria-controls": `simple-tabpanel-${index}`,
     };
 }
 
 const getTimetables = async () => {
-    const url = "http://localhost:8080/v1/all"
+    const url = "http://localhost:8080/v1/all";
     const response = await fetch(url);
     const data = await response.json();
 
     return data;
-}
+};
 
 export default function BusTimetable() {
     const [value, setValue] = React.useState(0);
@@ -62,10 +62,10 @@ export default function BusTimetable() {
     const [OITNagao, setOITNagao] = React.useState<Bus[]>([]);
 
     const busRoutes = [
-        { buses: kuzuhaOIT, label: '樟葉 → OIT' },
-        { buses: OITKuzuha, label: 'OIT → 樟葉' },
-        { buses: nagaoOIT, label: '長尾 → OIT' },
-        { buses: OITNagao, label: 'OIT → 長尾' }
+        { buses: kuzuhaOIT, label: "樟葉 → OIT" },
+        { buses: OITKuzuha, label: "OIT → 樟葉" },
+        { buses: nagaoOIT, label: "長尾 → OIT" },
+        { buses: OITNagao, label: "OIT → 長尾" },
     ];
 
     const renderTabPanel = (buses: Bus[], index: number) => {
@@ -75,7 +75,8 @@ export default function BusTimetable() {
                     バスの情報がありません
                 </CustomTabPanel>
             );
-        } else if (buses.length === 0) {
+        }
+        if (buses.length === 0) {
             return (
                 <CustomTabPanel value={value} index={index}>
                     <CircularProgress />
@@ -113,11 +114,11 @@ export default function BusTimetable() {
         };
 
         fetchTimetables();
-        const fetchInterval = 70000 // 70秒
+        const fetchInterval = 70000; // 70秒
         const intervalId = setInterval(fetchTimetables, fetchInterval);
 
         return () => clearInterval(intervalId);
-    } , []);
+    }, []);
 
     return (
         <Container>
@@ -129,8 +130,8 @@ export default function BusTimetable() {
                     {/* <OneMinuteTimer /> */}
                 </Typography>
             </Box>
-            <Box sx={{ width: '100%' }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Box sx={{ width: "100%" }}>
+                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                     <Tabs value={value} onChange={handleChange}>
                         <Tab label="樟葉 → OIT" {...a11yProps(0)} />
                         <Tab label="OIT → 樟葉" {...a11yProps(1)} />
@@ -138,7 +139,9 @@ export default function BusTimetable() {
                         <Tab label="OIT → 長尾" {...a11yProps(3)} />
                     </Tabs>
                 </Box>
-                {busRoutes.map((route, index) => renderTabPanel(route.buses, index))}
+                {busRoutes.map((route, index) =>
+                    renderTabPanel(route.buses, index),
+                )}
             </Box>
         </Container>
     );

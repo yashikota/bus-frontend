@@ -11,11 +11,7 @@ export default function Clock() {
         return () => clearInterval(intervalId);
     }, []);
 
-    return (
-        <>
-            {time.toLocaleTimeString("ja-JP")}
-        </>
-    );
+    return <>{time.toLocaleTimeString("ja-JP")}</>;
 }
 
 export function OneMinuteTimer() {
@@ -36,9 +32,5 @@ export function OneMinuteTimer() {
         }
     }, [timer]);
 
-    return (
-        <>
-            {timer}
-        </>
-    );
+    return <>{timer}</>;
 }

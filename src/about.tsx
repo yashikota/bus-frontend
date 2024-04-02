@@ -1,7 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
-import markdown from './about.md?raw';
+import markdown from "./about.md?raw";
 import { Container } from "@mui/material";
 
 export const About = () => {
