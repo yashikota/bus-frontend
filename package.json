@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "bunx @biomejs/biome format ./src --write"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -23,6 +24,7 @@
     "rehype-sanitize": "^6.0.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.6.3",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
