@@ -69,7 +69,7 @@ export const CardComponent = (props: Bus) => {
                 >
                     {Stand === "OIT"
                         ? `${BusStop} → ${Name}`
-                        : `${Name} → ${BusStop}`}
+                        : `${BusStop} ${Name} → ${Stand}`}
                 </Typography>
 
                 <Typography

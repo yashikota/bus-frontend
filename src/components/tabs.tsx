@@ -130,7 +130,7 @@ export default function BusTimetable() {
                     <Clock />
                 </Typography>
                 <Typography variant="subtitle1" align="right">
-                    [β版]到着時刻を追加予定
+                    （β版）
                 </Typography>
             </Box>
             <Box sx={{ width: "100%" }}>

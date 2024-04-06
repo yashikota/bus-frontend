@@ -1,8 +1,10 @@
 # OIT Bus App
 
-起動初回時に10秒ほど待つ必要があります。  
+現在β版です。  
+正式版では目的地への到着時間の情報を追加する予定です。  
+
 1分毎に自動更新されます。  
-お問い合わせは[ここ](https://github.com/oit-tools/bus-frontend/issues)からお願いします。  
+お問い合わせは[issues](https://github.com/oit-tools/bus-frontend/issues)からお願いします。  
 
 ## 北山中央三兄弟の場所
 
