@@ -126,11 +126,11 @@ export default function BusTimetable() {
     return (
         <Container>
             <Box component="section" sx={{ mt: 2, p: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Typography variant="h5" component="h1" align="left">
+                <Typography variant="h5" align="left">
                     <Clock />
                 </Typography>
-                <Typography variant="h5" component="h1" align="right">
-                    β版です。到着時刻の情報を追加予定。
+                <Typography variant="subtitle1" align="right">
+                    [β版]到着時刻を追加予定
                 </Typography>
             </Box>
             <Box sx={{ width: "100%" }}>

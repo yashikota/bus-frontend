@@ -43,17 +43,26 @@ export const CardComponent = (props: Bus) => {
 
                 <Typography
                     gutterBottom
-                    variant="h5"
+                    variant="h6"
                     component="div"
                     margin="auto"
                     textAlign="center"
                 >
-                    {OnTime}発 [{System}] {Destination} 行き
+                    {OnTime}発 [{System}]
+                </Typography>
+                <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="div"
+                    margin="auto"
+                    textAlign="center"
+                >
+                    {Destination} 行き
                 </Typography>
 
                 <Typography
                     gutterBottom
-                    variant="h5"
+                    variant="h6"
                     component="div"
                     margin="auto"
                     textAlign="center"
@@ -65,7 +74,7 @@ export const CardComponent = (props: Bus) => {
 
                 <Typography
                     gutterBottom
-                    variant="h5"
+                    variant="h6"
                     component="div"
                     margin="auto"
                     textAlign="center"
@@ -78,7 +87,7 @@ export const CardComponent = (props: Bus) => {
 
                 <Typography
                     gutterBottom
-                    variant="h5"
+                    variant="h6"
                     component="div"
                     margin="auto"
                     textAlign="center"
