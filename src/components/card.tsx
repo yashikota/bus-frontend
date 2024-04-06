@@ -22,7 +22,7 @@ export const CardComponent = (props: Bus) => {
         Name,
         // IsSignal,
         OnTime,
-        EstimatedTime,
+        // EstimatedTime,
         MoreMinutes,
         DelayMinutes,
         System,
@@ -70,10 +70,10 @@ export const CardComponent = (props: Bus) => {
                     margin="auto"
                     textAlign="center"
                 >
-                    {EstimatedTime}到着予定,{" "}
+                    {/* {EstimatedTime}到着予定,{" "} */}
                     {MoreMinutes === "まもなく到着"
                         ? "まもなく到着"
-                        : `残り${MoreMinutes}`}
+                        : `${MoreMinutes}後にバスが来ます`}
                 </Typography>
 
                 <Typography

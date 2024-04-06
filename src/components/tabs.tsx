@@ -42,7 +42,9 @@ function a11yProps(index: number) {
 }
 
 const getTimetables = async () => {
-    const url = "https://api.bus.oit.yashikota.com/v1/all";
+    const base = "https://api.bus.oit.yashikota.com/v1/all";
+    const query = "?source=app"
+    const url = new URL(base + query);
     const response = await fetch(url);
     const data = await response.json();
 
@@ -72,7 +74,7 @@ export default function BusTimetable() {
         if (!buses) {
             return (
                 <CustomTabPanel value={value} index={index}>
-                    バスの情報がありません
+                    <Typography>バスの情報がありません</Typography>
                 </CustomTabPanel>
             );
         }
@@ -80,6 +82,7 @@ export default function BusTimetable() {
             return (
                 <CustomTabPanel value={value} index={index}>
                     <CircularProgress />
+                    <Typography>バスの情報を取得中です。10秒ほどお待ち下さい。</Typography>
                 </CustomTabPanel>
             );
         }
@@ -122,12 +125,12 @@ export default function BusTimetable() {
 
     return (
         <Container>
-            <Box component="section" sx={{ mt: 2, p: 2 }}>
+            <Box component="section" sx={{ mt: 2, p: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Typography variant="h5" component="h1" align="left">
                     <Clock />
                 </Typography>
                 <Typography variant="h5" component="h1" align="right">
-                    {/* <OneMinuteTimer /> */}
+                    β版です。到着時刻の情報を追加予定。
                 </Typography>
             </Box>
             <Box sx={{ width: "100%" }}>
