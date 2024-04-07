@@ -80,9 +80,7 @@ export const CardComponent = (props: Bus) => {
                     textAlign="center"
                 >
                     {/* {EstimatedTime}到着予定,{" "} */}
-                    {MoreMinutes === "まもなく到着"
-                        ? "まもなく到着"
-                        : `${MoreMinutes}後にバスが来ます`}
+                    {MoreMinutes === "まもなく到着" ? "まもなく到着" : MoreMinutes === "到着済" ? "到着済" : `${MoreMinutes}後にバスが来ます`}
                 </Typography>
 
                 <Typography

@@ -43,6 +43,7 @@ function a11yProps(index: number) {
 
 const getTimetables = async () => {
     const base = "https://api.bus.oit.yashikota.com/v1/all";
+    // const base = "http://localhost:8080/v1/all" // DEBUG
     const query = "?source=app"
     const url = new URL(base + query);
     const response = await fetch(url);
