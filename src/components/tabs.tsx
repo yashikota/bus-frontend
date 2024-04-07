@@ -62,12 +62,16 @@ export default function BusTimetable() {
     const [OITKuzuha, setOITKuzuha] = React.useState<Bus[]>([]);
     const [nagaoOIT, setNagaoOIT] = React.useState<Bus[]>([]);
     const [OITNagao, setOITNagao] = React.useState<Bus[]>([]);
+    const [HirakataOIT, setHirakataOIT] = React.useState<Bus[]>([]);
+    const [OITHirakata, setOITHirakata] = React.useState<Bus[]>([]);
 
     const busRoutes = [
         { buses: kuzuhaOIT, label: "樟葉 → OIT" },
         { buses: OITKuzuha, label: "OIT → 樟葉" },
         { buses: nagaoOIT, label: "長尾 → OIT" },
         { buses: OITNagao, label: "OIT → 長尾" },
+        { buses: HirakataOIT, label: "枚方 → OIT" },
+        { buses: OITHirakata, label: "OIT → 枚方" },
     ];
 
     const renderTabPanel = (buses: Bus[], index: number) => {
@@ -114,6 +118,8 @@ export default function BusTimetable() {
             setOITKuzuha(data.BusTimetables["OIT-Kuzuha"]);
             setNagaoOIT(data.BusTimetables["Nagao-OIT"]);
             setOITNagao(data.BusTimetables["OIT-Nagao"]);
+            setHirakataOIT(data.BusTimetables["Hirakata-OIT"]);
+            setOITHirakata(data.BusTimetables["OIT-Hirakata"]);
         };
 
         fetchTimetables();
@@ -140,6 +146,8 @@ export default function BusTimetable() {
                         <Tab label="OIT → 樟葉" {...a11yProps(1)} />
                         <Tab label="長尾 → OIT" {...a11yProps(2)} />
                         <Tab label="OIT → 長尾" {...a11yProps(3)} />
+                        <Tab label="枚方 → OIT" {...a11yProps(4)} />
+                        <Tab label="OIT → 枚方" {...a11yProps(5)} />
                     </Tabs>
                 </Box>
                 {busRoutes.map((route, index) =>
