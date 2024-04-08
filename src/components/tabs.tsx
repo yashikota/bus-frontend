@@ -44,7 +44,7 @@ function a11yProps(index: number) {
 const getTimetables = async () => {
     const base = "https://api.bus.oit.yashikota.com/v1/all";
     // const base = "http://localhost:8080/v1/all" // DEBUG
-    const query = "?source=app"
+    const query = "?source=app";
     const url = new URL(base + query);
     const response = await fetch(url);
     const data = await response.json();
@@ -87,7 +87,9 @@ export default function BusTimetable() {
             return (
                 <CustomTabPanel value={value} index={index}>
                     <CircularProgress />
-                    <Typography>バスの情報を取得中です。10秒ほどお待ち下さい。</Typography>
+                    <Typography>
+                        バスの情報を取得中です。10秒ほどお待ち下さい。
+                    </Typography>
                 </CustomTabPanel>
             );
         }
@@ -132,7 +134,16 @@ export default function BusTimetable() {
 
     return (
         <Container>
-            <Box component="section" sx={{ mt: 2, p: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Box
+                component="section"
+                sx={{
+                    mt: 2,
+                    p: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                }}
+            >
                 <Typography variant="h5" align="left">
                     <Clock />
                 </Typography>
@@ -142,7 +153,12 @@ export default function BusTimetable() {
             </Box>
             <Box sx={{ width: "100%" }}>
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                    <Tabs value={value} onChange={handleChange}>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        variant="scrollable"
+                        scrollButtons="auto"
+                    >
                         <Tab label="樟葉 → OIT" {...a11yProps(0)} />
                         <Tab label="OIT → 樟葉" {...a11yProps(1)} />
                         <Tab label="長尾 → OIT" {...a11yProps(2)} />
