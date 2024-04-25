@@ -148,7 +148,7 @@ export default function BusTimetable() {
                     <Clock />
                 </Typography>
                 <Typography variant="subtitle1" align="right">
-                    （β版）
+                    メンテナンス中です🙇
                 </Typography>
             </Box>
             <Box sx={{ width: "100%" }}>
